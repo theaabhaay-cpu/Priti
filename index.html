@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 21st Birthday Priti ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050509;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#stars {
+    z-index: 0;
+}
+
+#fireworks {
+    z-index: 10;
+}
+
+.page {
+    position: relative;
+    z-index: 2;
+}
+
+/* INTRO */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #050509;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.terminal {
+    width: min(850px, 100%);
+    background: #0d0d16;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(255,70,150,.2);
+}
+
+.terminal-top {
+    height: 42px;
+    background: #15151f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.red {
+    background: #ff5f57;
+}
+
+.yellow {
+    background: #febc2e;
+}
+
+.green {
+    background: #28c840;
+}
+
+.terminal-title {
+    margin: auto;
+    color: #777;
+    font-size: 12px;
+}
+
+.terminal-body {
+    min-height: 400px;
+    padding: 28px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 2;
+    color: #ccc;
+}
+
+.green-text {
+    color: #63e6be;
+}
+
+.pink-text {
+    color: #ff75ad;
+}
+
+.purple-text {
+    color: #bd93f9;
+}
+
+#enterBtn {
+    border: none;
+    padding: 14px 24px;
+    border-radius: 50px;
+    background: linear-gradient(135deg,#ff4f9a,#9b5cff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 10px 35px rgba(255,79,154,.3);
+}
+
+/* HERO */
+
+section {
+    min-height: 100vh;
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.badge {
+    padding: 9px 17px;
+    border: 1px solid rgba(255,79,154,.4);
+    border-radius: 50px;
+    color: #ff9bc6;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(70px, 17vw, 170px);
+    line-height: .9;
+    background: linear-gradient(120deg,#fff,#ff7db4,#a77aff,#fff);
+    background-size: 250%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient 5s linear infinite;
+}
+
+@keyframes gradient {
+    to {
+        background-position: 250%;
+    }
+}
+
+.hero h2 {
+    margin-top: 30px;
+    font-size: clamp(20px,4vw,30px);
+    color: #ccc;
+}
+
+.hero h2 span {
+    color: #ff4f9a;
+}
+
+.from {
+    margin-top: 20px;
+    color: #999;
+}
+
+.from strong {
+    color: #ff72aa;
+}
+
+.scroll {
+    margin-top: 50px;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+/* MESSAGE */
+
+.message {
+    max-width: 750px;
+}
+
+.title {
+    font-family: Georgia, serif;
+    font-size: clamp(42px,8vw,80px);
+    margin-bottom: 40px;
+}
+
+.title span {
+    color: #ff4f9a;
+}
+
+.card {
+    width: 100%;
+    padding: 35px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: rgba(255,255,255,.05);
+    box-shadow: 0 25px 80px rgba(0,0,0,.4);
+}
+
+.card p {
+    color: #ddd;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.signature {
+    color: #ff76ad;
+    font-family: monospace;
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+/* HEART */
+
+.heart {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg,#ff4f9a,#9b5cff);
+    transform: rotate(-45deg);
+    margin: 80px 0;
+    animation: beat 1.3s infinite;
+    box-shadow: 0 0 80px rgba(255,79,154,.4);
+    cursor: pointer;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: inherit;
+}
+
+.heart::before {
+    top: -60px;
+}
+
+.heart::after {
+    left: 60px;
+}
+
+@keyframes beat {
+    50% {
+        transform: rotate(-45deg) scale(1.15);
+    }
+}
+
+/* GIFT */
+
+.gift {
+    font-size: 100px;
+    cursor: pointer;
+    margin: 50px;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+#surprise {
+    display: none;
+}
+
+#surprise.show {
+    display: block;
+    animation: reveal 1s ease;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#surprise h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(40px,8vw,80px);
+    color: #ff75ad;
+}
+
+#surprise p {
+    max-width: 650px;
+    margin: 25px auto;
+    color: #ccc;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 50px 20px;
+    color: #777;
+    font-family: monospace;
+}
+
+footer span {
+    color: #ff70aa;
+}
+
+@media(max-width:600px) {
+    .terminal-body {
+        padding: 20px;
+        font-size: 11px;
+    }
+
+    .card {
+        padding: 25px 20px;
+    }
+}
+</style>
+</head></style>
+</head><body>
+
+<canvas id="stars"></canvas>
+<canvas id="fireworks"></canvas>
+
+<!-- INTRO SCREEN -->
+<div id="intro">
+
+    <div class="terminal">
+
+        <div class="terminal-top">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+
+            <div class="terminal-title">
+                abhay@birthday — terminal
+            </div>
+        </div>
+
+        <div class="terminal-body" id="terminalBody"></div>
+
+    </div>
+
+</div>
+
+
+<div class="page">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="badge">
+            BIRTHDAY EDITION • v21.0.0
+        </div>
+
+        <h1>Pretty</h1>
+
+        <h2>
+            Happy <span>21st</span> Birthday, Priti ❤️
+        </h2>
+
+        <div class="from">
+
+            A little website made especially for you
+
+            <br><br>
+
+            <strong>
+                — From Abhay ❤️
+            </strong>
+
+        </div>
+
+        <div class="scroll">
+            SCROLL TO DISCOVER ↓
+        </div>
+
+    </section>
+
+
+    <!-- DEVELOPER SECTION -->
+
+    <section>
+
+        <div class="title">
+            Meet <span>Pretty.</span>
+        </div>
+
+        <div class="message card">
+
+            <p>
+                <strong style="color:#ff75ad;">
+                    Priti = Pretty
+                </strong>
+            </p>
+
+            <p>
+                A web developer, a smart mind,
+                and someone who deserves a birthday
+                website that is slightly more complicated
+                than a normal birthday message. 😌
+            </p>
+
+            <p>
+                So I built this little corner of the internet
+                just for you.
+            </p>
+
+            <p style="font-family:monospace;color:#8be9fd;">
+                const age = 21;<br>
+                const birthday = true;<br>
+                const pretty = "Priti";
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- 21 REASONS -->
+
+    <section>
+
+        <div class="title">
+            21 reasons <span>you are special.</span>
+        </div>
+
+        <div class="message card">
+
+            <p>01 — Your smile is seriously powerful. ❤️</p>
+
+            <p>02 — You're genuinely smart.</p>
+
+            <p>03 — You're creative.</p>
+
+            <p>04 — You're a developer, which is automatically cool. 💻</p>
+
+            <p>05 — You have your own unique energy.</p>
+
+            <p>06 — You make conversations memorable.</p>
+
+            <p>07 — Your little reactions are adorable.</p>
+
+            <p>08 — You have a beautiful mind.</p>
+
+            <p>09 — You're impossible to duplicate.</p>
+
+            <p>10 — You're always learning.</p>
+
+            <p>11 — You can make someone's day without realizing it.</p>
+
+            <p>12 — You're beautifully yourself.</p>
+
+            <p>13 — You deserve appreciation.</p>
+
+            <p>14 — You can be cute and intimidating at the same time. 😂</p>
+
+            <p>15 — You make ordinary moments better.</p>
+
+            <p>16 — Your ambition is inspiring.</p>
+
+            <p>17 — You have a personality people remember.</p>
+
+            <p>18 — You are wonderfully imperfect.</p>
+
+            <p>19 — You deserve an amazing year.</p>
+
+            <p>20 — There is only one Pretty.</p>
+
+            <p>
+                21 — Because 21 looks REALLY good on you. ❤️
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- HEART -->
+
+    <section>
+
+        <div class="title">
+            Status: <span>Perfect.</span>
+        </div>
+
+        <div class="heart" id="heart"></div>
+
+        <div class="message">
+
+            <p style="
+                color:#aaa;
+                line-height:1.8;
+                font-size:18px;
+            ">
+
+                After running extensive tests,
+                countless simulations,
+                and probably way too much overthinking...
+
+                <br><br>
+
+                The result is still:
+
+                <br><br>
+
+                <strong style="
+                    color:#fff;
+                    font-size:25px;
+                ">
+                    Priti = Pretty ❤️
+                </strong>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- LETTER -->
+
+    <section>
+
+        <div class="title">
+            A message <span>for you.</span>
+        </div>
+
+        <div class="message card">
+
+            <p>
+                Dear Pretty,
+            </p>
+
+            <p>
+                Happy 21st Birthday, Priti! ❤️
+            </p>
+
+            <p>
+                I could have just sent you a normal
+                birthday message...
+                but where's the fun in that?
+            </p>
+
+            <p>
+                Since you're a web developer,
+                I thought the only acceptable way
+                to wish you was to build something.
+            </p>
+
+            <p>
+                So here's a tiny piece of the internet
+                made especially for you.
+            </p>
+
+            <p>
+                I hope this new chapter of your life
+                brings you happiness, success,
+                amazing memories, and plenty of reasons
+                to smile.
+            </p>
+
+            <p>
+                May version 21.0 of your life be your
+                best release yet.
+            </p>
+
+            <p>
+                Keep smiling.
+                Keep coding.
+                Keep being Pretty. ❤️
+            </p>
+
+            <div class="signature">
+
+                — Abhay ❤️
+
+                <br>
+
+                <small style="color:#777;">
+                    Your personal birthday developer
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL SURPRISE -->
+
+    <section>
+
+        <div class="title">
+            One last <span>thing...</span>
+        </div>
+
+        <p style="
+            color:#999;
+            font-size:17px;
+            line-height:1.8;
+        ">
+
+            Every good website has an Easter egg.
+
+            <br>
+
+            Every great birthday deserves a surprise.
+
+        </p>
+
+
+        <div
+            class="gift"
+            id="gift"
+        >
+            🎁
+        </div>
+
+
+        <div id="surprise">
+
+            <h2>
+                Happy 21st, Priti! 🎂
+            </h2>
+
+            <p>
+
+                You have officially unlocked
+
+                <strong style="color:#ff75ad;">
+                    Pretty v21.0
+                </strong>
+
+                <br><br>
+
+                May the next 365 days be your
+                best release yet.
+
+                <br><br>
+
+                Keep smiling.
+                Keep coding.
+                Keep being Pretty. ❤️
+
+            </p>
+
+            <div class="signature">
+                Made with ❤️ by Abhay
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer>
+
+    <span>
+        console.log("Happy Birthday Priti ❤️ — From Abhay");
+    </span>
+
+    <br><br>
+
+    Built with code, chaos & a little bit of heart.
+
+</footer></footer></footer><script>
+
+/* =========================
+   STAR BACKGROUND
+========================= */
+
+const starsCanvas = document.getElementById("stars");
+const starsCtx = starsCanvas.getContext("2d");
+
+let stars = [];
+
+function resizeStars() {
+    starsCanvas.width = window.innerWidth;
+    starsCanvas.height = window.innerHeight;
+}
+
+resizeStars();
+
+window.addEventListener("resize", resizeStars);
+
+for (let i = 0; i < 150; i++) {
+
+    stars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 2,
+        speed: Math.random() * 0.3 + 0.1,
+        opacity: Math.random()
+    });
+
+}
+
+function animateStars() {
+
+    starsCtx.clearRect(
+        0,
+        0,
+        starsCanvas.width,
+        starsCanvas.height
+    );
+
+    stars.forEach(star => {
+
+        star.y += star.speed;
+
+        if (star.y > starsCanvas.height) {
+            star.y = 0;
+            star.x = Math.random() * starsCanvas.width;
+        }
+
+        starsCtx.beginPath();
+
+        starsCtx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+
+        starsCtx.fillStyle =
+            `rgba(255,255,255,${star.opacity})`;
+
+        starsCtx.fill();
+
+    });
+
+    requestAnimationFrame(animateStars);
+
+}
+
+animateStars();
+
+
+/* =========================
+   INTRO TERMINAL
+========================= */
+
+const terminal =
+    document.getElementById("terminalBody");
+
+const intro =
+    document.getElementById("intro");
+
+const terminalLines = [
+
+    `<span class="green-text">$ npm install pretty@21.0.0</span>`,
+
+    `<span class="purple-text">
+    Resolving birthday dependencies...
+    </span>`,
+
+    `Loading special birthday package...`,
+
+    `<span class="green-text">✓</span> Priti`,
+
+    `<span class="green-text">✓</span> Pretty`,
+
+    `<span class="green-text">✓</span> Web Developer`,
+
+    `<span class="green-text">✓</span> 21 years unlocked`,
+
+    `<span class="green-text">✓</span> Unlimited potential`,
+
+    ``,
+
+    `<span class="pink-text">
+    Installing birthday surprise...
+    </span>`,
+
+    `<span style="color:white">
+    Gift prepared by: Abhay ❤️
+    </span>`,
+
+    ``,
+
+    `<span class="green-text">
+    ✓ Build successful.
+    </span>`,
+
+    `<span class="green-text">
+    ✓ Birthday mode activated.
+    </span>`,
+
+    `<span class="pink-text">
+    ✓ Pretty has leveled up to v21.0.0.
+    </span>`,
+
+    ``,
+
+    `<span style="color:white;font-size:16px;">
+    Happy Birthday, Priti ❤️
+    </span>`,
+
+    `<span class="pink-text">
+    — From Abhay
+    </span>`,
+
+    ``,
+
+    `<button id="enterBtn">
+    ENTER YOUR BIRTHDAY ✨
+    </button>`
+
+];
+
+let line = 0;
+
+function typeTerminal() {
+
+    if (line >= terminalLines.length) {
+        return;
+    }
+
+    terminal.innerHTML +=
+        terminalLines[line] + "<br>";
+
+    line++;
+
+    setTimeout(
+        typeTerminal,
+        line === terminalLines.length
+            ? 300
+            : 180
+    );
+
+}
+
+typeTerminal();
+
+
+/* =========================
+   ENTER BUTTON
+========================= */
+
+document.addEventListener("click", function(event) {
+
+    if (event.target.id === "enterBtn") {
+
+        intro.classList.add("hide");
+
+        launchFireworks();
+
+        setTimeout(() => {
+
+            intro.style.display = "none";
+
+        }, 1200);
+
+    }
+
+});
+
+
+/* =========================
+   FIREWORKS
+========================= */
+
+const fireworksCanvas =
+    document.getElementById("fireworks");
+
+const fireworksCtx =
+    fireworksCanvas.getContext("2d");
+
+let particles = [];
+
+function resizeFireworks() {
+
+    fireworksCanvas.width =
+        window.innerWidth;
+
+    fireworksCanvas.height =
+        window.innerHeight;
+
+}
+
+resizeFireworks();
+
+window.addEventListener(
+    "resize",
+    resizeFireworks
+);
+
+
+function createFirework(x, y) {
+
+    for (let i = 0; i < 80; i++) {
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const speed =
+            Math.random() * 6 + 2;
+
+        particles.push({
+
+            x: x,
+
+            y: y,
+
+            vx:
+                Math.cos(angle) * speed,
+
+            vy:
+                Math.sin(angle) * speed,
+
+            life: 1,
+
+            decay:
+                Math.random() * 0.02 + 0.01,
+
+            size:
+                Math.random() * 2 + 1
+
+        });
+
+    }
+
+}
+
+
+function animateFireworks() {
+
+    fireworksCtx.fillStyle =
+        "rgba(5,5,9,0.2)";
+
+    fireworksCtx.fillRect(
+        0,
+        0,
+        fireworksCanvas.width,
+        fireworksCanvas.height
+    );
+
+    particles.forEach((particle, index) => {
+
+        particle.x += particle.vx;
+
+        particle.y += particle.vy;
+
+        particle.vy += 0.05;
+
+        particle.life -= particle.decay;
+
+        fireworksCtx.beginPath();
+
+        fireworksCtx.arc(
+            particle.x,
+            particle.y,
+            particle.size,
+            0,
+            Math.PI * 2
+        );
+
+        fireworksCtx.fillStyle =
+            `rgba(
+                255,
+                ${80 + Math.random() * 150},
+                ${150 + Math.random() * 105},
+                ${particle.life}
+            )`;
+
+        fireworksCtx.fill();
+
+        if (particle.life <= 0) {
+
+            particles.splice(index, 1);
+
+        }
+
+    });
+
+    requestAnimationFrame(
+        animateFireworks
+    );
+
+}
+
+animateFireworks();
+
+
+function launchFireworks() {
+
+    for (let i = 0; i < 12; i++) {
+
+        setTimeout(() => {
+
+            createFirework(
+
+                Math.random() *
+                    window.innerWidth,
+
+                Math.random() *
+                    window.innerHeight *
+                    0.55
+
+            );
+
+        }, i * 250);
+
+    }
+
+}
+
+
+/* =========================
+   HEART CLICK
+========================= */
+
+document
+    .getElementById("heart")
+    .addEventListener(
+        "click",
+        function() {
+
+            for (let i = 0; i < 5; i++) {
+
+                setTimeout(() => {
+
+                    createFirework(
+
+                        window.innerWidth / 2 +
+                        (Math.random() - 0.5) * 400,
+
+                        window.innerHeight / 2 +
+                        (Math.random() - 0.5) * 250
+
+                    );
+
+                }, i * 200);
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   GIFT SURPRISE
+========================= */
+
+const gift =
+    document.getElementById("gift");
+
+const surprise =
+    document.getElementById("surprise");
+
+gift.addEventListener(
+    "click",
+    function() {
+
+        gift.style.transform =
+            "scale(0) rotate(30deg)";
+
+        gift.style.opacity = "0";
+
+        setTimeout(() => {
+
+            surprise.classList.add("show");
+
+            launchFireworks();
+
+        }, 400);
+
+    }
+);
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.id === "enterBtn" ||
+            event.target.id === "gift"
+        ) {
+            return;
+        }
+
+        const heart =
+            document.createElement("div");
+
+        heart.innerHTML = "♥";
+
+        heart.style.position =
+            "fixed";
+
+        heart.style.left =
+            event.clientX + "px";
+
+        heart.style.top =
+            event.clientY + "px";
+
+        heart.style.color =
+            "#ff4f9a";
+
+        heart.style.fontSize =
+            (14 + Math.random() * 18) + "px";
+
+        heart.style.pointerEvents =
+            "none";
+
+        heart.style.zIndex = "50";
+
+        document.body.appendChild(
+            heart
+        );
+
+        const animation =
+            heart.animate(
+
+                [
+
+                    {
+                        transform:
+                            "translate(-50%,-50%) scale(.5)",
+
+                        opacity: 1
+
+                    },
+
+                    {
+
+                        transform:
+                            "translate(-50%,-180%) scale(1.4)",
+
+                        opacity: 0
+
+                    }
+
+                ],
+
+                {
+
+                    duration: 900,
+
+                    easing:
+                        "ease-out"
+
+                }
+
+            );
+
+        animation.finished.then(
+            () => heart.remove()
+        );
+
+    }
+);
+
+
+/* =========================
+   CONSOLE MESSAGE
+========================= */
+
+console.log(`
+
+🎂 HAPPY BIRTHDAY PRITI! ❤️
+
+This website was made especially for you.
+
+Developer:
+Abhay
+
+Achievement unlocked:
+✓ Birthday Surprise
+✓ Pretty v21.0
+✓ 0 production bugs
+
+Happy 21st, Priti ❤️
+
+— Abhay
+
+`);
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    Step 2 code
+</head>
+
+<body>
+
+    Step 3 code
+
+    Step 4 JavaScript
+
+</body>
+</html>
